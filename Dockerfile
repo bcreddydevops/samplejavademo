@@ -1,3 +1,3 @@
 FROM tomcat:8.0.20-jre8
 
-COPY target/samplejavademo*.war /usr/local/tomcat/webapps/samplejavademo.war
+COPY target/hiring.war /usr/local/tomcat/webapps/hiring.war
