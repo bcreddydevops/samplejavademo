@@ -19,5 +19,13 @@ pipeline{
                 sh "docker build . -t chinnareddaiah/samplejavademo:0.0.1"
             }
         }
+         stage('Docker Push') {
+            steps {
+                withCredentials([string(credentialsId: 'docker-hub', variable: 'docker-hub')]) {
+                    sh "docker login -u chinnareddaiah -p ${docker-hub}"
+                    sh "docker push chinnareddaiah/samplejavademo:0.0.1"
+                }
+            }
+        }
     }
 }
