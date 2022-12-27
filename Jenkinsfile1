@@ -3,6 +3,10 @@ pipeline{
     tools{
         maven 'apache-maven-3.8.6'
     }
+    def commit_id(){
+    id = sh returnStdout: true, script: 'git rev-parse HEAD'
+    return id
+    
     stages{
         stage('checkout the code'){
             steps{
