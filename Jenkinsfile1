@@ -16,21 +16,21 @@ pipeline{
         }
          stage('Docker Build') {
             steps {
-                sh "docker build . -t chinnareddaiah/samplejavademo:0.0.1"
+                sh "docker build . -t chinnareddaiah/samplejavademo:${commit_id()}"
             }
         }
          stage('Docker Push') {
             steps {
                 withCredentials([string(credentialsId: 'docker-hub1', variable: 'hubpwd')]) {
                  sh "docker login -u chinnareddaiah -p ${hubPwd}"
-                 sh "docker push chinnareddaiah/samplejavademo:0.0.1"
+                 sh "docker push chinnareddaiah/samplejavademo:${commit_id()}"
               }
             }
         }
          stage('Docker Deploy') {
             steps {
                 sshagent(['docker-host']) {
-                    sh "ssh -o StrictHostKeyChecking=no ec2-user@3.84.212.218 docker run -d -p 8080:8080 --name samplejavademo chinnareddaiah/samplejavademo:0.0.1"
+                    sh "ssh -o StrictHostKeyChecking=no ec2-user@3.84.212.218 docker run -d -p 8080:8080 --name samplejavademo chinnareddaiah/samplejavademo:${commit_id()}"
                 }
             }
         }
