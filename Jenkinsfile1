@@ -32,7 +32,8 @@ pipeline{
          stage('Docker Deploy') {
             steps {
                 sshagent(['docker-host']) {
-                    sh "ssh -o StrictHostKeyChecking=no ec2-user@3.84.212.218 docker run -d -p 8080:8080 --name samplejavademo chinnareddaiah/samplejavademo:${commit_id()}"
+                    sh "ssh -o StrictHostKeyChecking=no ec2-user@3.84.212.218 docker rm -f samplejavademo"
+                    sh "ssh ec2-user@3.84.212.218 docker run -d -p 8080:8080 --name samplejavademo chinnareddaiah/samplejavademo:${commit_id()}"
                 }
             }
         }
