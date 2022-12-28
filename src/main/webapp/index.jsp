@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2 style="color: Red">Welcome To BCReddy DevOps</h2>
+<h2 style="color: Blue">Welcome To BCReddy DevOps ..Learn EveryDay</h2>
 </body>
 </html>
